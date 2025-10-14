@@ -1,6 +1,15 @@
-import { Text,View,StyleSheet,Pressable} from "react-native";
+import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
 
-
+// export const COLORS = {
+//    background: '#F5EDE3',     // svijetla bež pozadina ekrana
+//    card: '#FFF8F1',           // bež karta (forma)
+//    accent: '#E6734B',         // narančasti gumb
+//    accentDark: '#C55B3A',     // tamnija narančasta
+//    text: '#4A3C31',           // tamno smeđa za tekst
+//    textLight: '#8E7D6B',      // svjetlija smeđa za sekundarni tekst
+//    border: '#E8DCCA',         // tanka linija obruba inputa
+//    white: '#FFFFFF',          // čista bijela
+//  };
 export default function LoginScreen(){
    return(
       <View style={styles.mainContainer}>
@@ -9,7 +18,7 @@ export default function LoginScreen(){
          </View>
 
          <View style={styles.stupidMessageContainer}>
-            <Text style={{ textAlign: 'center', fontSize: 16}}>
+            <Text style={{ textAlign: 'center', fontSize: 15}}>
                Your job is waiting for you — what are you waiting for?{'\n'}
                Start your journey today.
             </Text>
@@ -17,13 +26,28 @@ export default function LoginScreen(){
 
          <View style={styles.loginBoxContainer}>
             <View style={styles.sugestionTextContainer}>
-               <Text>Email</Text>
+                  <View style={styles.textPadding}>
+                     <Text>Enter your email</Text>
+                  </View>
                <View style={styles.inputContainer}>
-                  <Text>Email</Text>
+                  <TextInput
+                  placeholder='mail@example.com'
+                  ></TextInput>
                </View>
             </View>
-            <View style={styles.inputContainer}>
-                <Text>Pass/forgot pass button</Text>
+
+            <View style={styles.sugestionTextContainer}>
+                  <View style={styles.textPadding}>
+                     <Text>Enter your password</Text>
+                  </View>
+               <View style={styles.inputContainer}>
+                  <TextInput 
+                  placeholder="..."
+                  ></TextInput>
+               </View>
+                  <Pressable style={styles.forgotPassword}>
+                     <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+                  </Pressable>
             </View>
 
             <Pressable style={styles.loginButton}>
@@ -32,10 +56,12 @@ export default function LoginScreen(){
               
             </Pressable>
 
-            <Text>register</Text>
-
-
-
+            <View style={styles.registerContainer}>
+               <Text>Dont have an acount?</Text>
+               <Pressable style={styles.registerButton}>
+                  <Text style={styles.registerButtonText}>Sign Up</Text>
+               </Pressable>
+            </View>
 
          </View>
       </View>
@@ -71,39 +97,72 @@ const styles = StyleSheet.create({
       width:'80%',
       height: '52%',
       alignItems: 'center',
-      justifyContent: 'space-evenly'
+      paddingVertical: '12%',
+
+      //for iphone
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+
    },
    sugestionTextContainer:{
-      borderWidth: 1,
-
+      // borderWidth: 1,
       width: '84%',
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
+      marginTop: 22,
 
-      height:'10%'
-      
-   },
+    },
+    
    inputContainer:{
       borderColor: '#E8DCCA',
       borderWidth: 1,
 
       backgroundColor: 'white',
       // width: '84%',
-      height: '12%',
+
       borderRadius: 12,
 
       justifyContent:'center',
       padding: 12,
+   },
+   textPadding:{
+      paddingHorizontal: 8,
+   }, 
+   forgotPassword:{
+      // borderWidth: 1,
+      alignItems: 'flex-end',
+      paddingRight: 6,
+   },
+   forgotPasswordText:{
+      color: '#4A3C31',
+      fontWeight: '600',
+      fontSize: 12
    },
    loginButton:{
       borderColor: '#E8DCCA',
       backgroundColor: '#E6734B',
       borderWidth: 1,
 
+      marginTop: 22,
       borderRadius: 16,
       justifyContent: 'center',
       alignItems: 'center',
       width: '80%',
-      height: '10%'
+      height: '12%'
+
+   },
+   registerContainer:{
+      marginTop:'20%',
+      flexDirection: 'row'
+   },
+   registerButton:{
+      // borderWidth: 1,
+      paddingHorizontal: 8,
+   },
+   registerButtonText:{
+      fontWeight: 'bold',
+      color: '#4A3C31',
 
    }
 })
