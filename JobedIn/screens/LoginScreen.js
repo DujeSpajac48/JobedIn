@@ -1,5 +1,5 @@
 import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
-
+import { useState } from "react";
 // export const COLORS = {
 //    background: '#F5EDE3',     // svijetla bež pozadina ekrana
 //    card: '#FFF8F1',           // bež karta (forma)
@@ -11,6 +11,11 @@ import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
 //    white: '#FFFFFF',          // čista bijela
 //  };
 export default function LoginScreen(){
+
+   //napravit handle login logiku
+   //dodat navigaciju
+   //dodat forgot password
+   
    return(
       <View style={styles.mainContainer}>
          <View style={styles.logoContainer}>
@@ -27,7 +32,7 @@ export default function LoginScreen(){
          <View style={styles.loginBoxContainer}>
             <View style={styles.sugestionTextContainer}>
                   <View style={styles.textPadding}>
-                     <Text>Enter your email</Text>
+                     <Text style={{color: '#4A3C31'}}>Enter your email</Text>
                   </View>
                <View style={styles.inputContainer}>
                   <TextInput
@@ -38,11 +43,12 @@ export default function LoginScreen(){
 
             <View style={styles.sugestionTextContainer}>
                   <View style={styles.textPadding}>
-                     <Text>Enter your password</Text>
+                     <Text style={{color: '#4A3C31'}}>Enter your password</Text>
                   </View>
                <View style={styles.inputContainer}>
                   <TextInput 
                   placeholder="..."
+                  
                   ></TextInput>
                </View>
                   <Pressable style={styles.forgotPassword}>
