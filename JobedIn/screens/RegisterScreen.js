@@ -68,7 +68,7 @@ export default function RegisterScreen(){
             </Pressable>
 
             <View style={styles.registerContainer}>
-               <Text>Alredy have an acount?</Text>
+               <Text>Already have an acount?</Text>
                <Pressable style={styles.registerButton}>
                   <Text style={styles.registerButtonText}>Login</Text>
                </Pressable>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       width: '80%',
-      height: '12%'
+      height: '10%'
 
    },
    registerContainer:{
