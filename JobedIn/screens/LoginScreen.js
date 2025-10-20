@@ -1,5 +1,7 @@
-import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
+import { Text,View,StyleSheet,TextInput,Pressable, Alert} from "react-native";
 import { useState } from "react";
+import Icon from 'react-native-vector-icons/Ionicons';
+import { userAPI } from "../services/api";
 // export const COLORS = {
 //    background: '#F5EDE3',     // svijetla bež pozadina ekrana
 //    card: '#FFF8F1',           // bež karta (forma)
@@ -12,9 +14,56 @@ import { useState } from "react";
 //  };
 export default function LoginScreen(){
 
-   //napravit handle login logiku
+   const [showPassword,setShowPassword] = useState(false);
+   const [loading,setLoading]= useState(false);
+   //napravit handle login logi
    //dodat navigaciju
    //dodat forgot password
+
+
+   const [formData,setFormData] = useState({
+      email: '',
+      pass: ''
+   })
+   const handleChange= async (field,value)=>{
+      setFormData(prev=>({
+         ...prev,
+         [field]: value
+      }));
+   }
+   
+
+   const handleLogin = async() => {
+      if (!formData.email || !formData.pass){
+         alert('Please fill all required fields');
+         return;
+      }
+
+      setLoading(true);
+
+      try{
+         console.log('Login formdata ',formData);
+         const response = await userAPI.login(formData.email, formData.pass);
+
+         if (response?.success) {
+            alert('Login successful!');
+            console.log('Logged in user:', response.user);
+         } else {
+            alert(response?.message || 'Login failed');
+         }
+         
+         setFormData({
+            email: '',
+            pass: ''
+         })
+
+      } catch (e){
+         console.log('userAPi error', e);
+         alert("Login Failed");
+      }finally {
+         setLoading(false);
+      }
+   }
    
    return(
       <View style={styles.mainContainer}>
@@ -37,6 +86,9 @@ export default function LoginScreen(){
                <View style={styles.inputContainer}>
                   <TextInput
                   placeholder='mail@example.com'
+
+                  value={formData.email}
+                  onChangeText={(text)=>{handleChange('email',text)}}
                   ></TextInput>
                </View>
             </View>
@@ -45,18 +97,31 @@ export default function LoginScreen(){
                   <View style={styles.textPadding}>
                      <Text style={{color: '#4A3C31'}}>Enter your password</Text>
                   </View>
-               <View style={styles.inputContainer}>
+                  <View style={styles.inputContainerPass}>
                   <TextInput 
-                  placeholder="..."
-                  
-                  ></TextInput>
+                     style={styles.passwordInput}
+                     placeholder="..."
+                     secureTextEntry={!showPassword}
+
+                     value={formData.pass}
+                     onChangeText={(text)=> handleChange('pass',text)}
+                  />
+                  <Icon 
+                     name={showPassword ? 'eye-off' : 'eye'} 
+                     size={16} 
+                     color="#666" 
+                     onPress={() => setShowPassword(!showPassword)}
+                  />
                </View>
                   <Pressable style={styles.forgotPassword}>
                      <Text style={styles.forgotPasswordText}>Forgot password?</Text>
                   </Pressable>
             </View>
 
-            <Pressable style={styles.loginButton}>
+            <Pressable 
+            style={styles.loginButton}
+            onPress={handleLogin}
+            >
 
                   <Text style={{color: 'white',fontSize: 18}}>Login</Text>
               
@@ -119,19 +184,30 @@ const styles = StyleSheet.create({
       marginTop: 22,
 
     },
-    
-   inputContainer:{
+    passwordInput:{
+      flex:1,
+   },
+   
+    inputContainer:{
       borderColor: '#E8DCCA',
       borderWidth: 1,
-
       backgroundColor: 'white',
       // width: '84%',
-
       borderRadius: 12,
-
       justifyContent:'center',
       padding: 12,
    },
+   inputContainerPass:{
+      borderColor: '#E8DCCA',
+      borderWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center', 
+      backgroundColor: 'white',
+      borderRadius: 12,
+      justifyContent:'center',
+      padding: 12,
+    },
    textPadding:{
       paddingHorizontal: 8,
    }, 

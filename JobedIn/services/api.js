@@ -1,10 +1,9 @@
 import axios from 'axios';
+import { Platform } from 'react-native';
 
-//SIMULATOR
-const API_BASE_URL = 'http://localhost:3000/api';
-
-
-// const API_BASE_URL = 'http://192.168.1.100:3000/api';
+const API_BASE_URL = Platform.OS === 'android'
+  ? 'http://10.0.2.2:3000/api' // Android emulator
+  : 'http://localhost:3000/api'; // iOS simulator
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -20,13 +19,23 @@ export const userAPI = {
       throw error.response?.data || { message: 'Network error' };
     }
   },
-};
 
-login: async (email, password) => {
-  try {
-    const response = await api.post('/users/login', { email, password });
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || { message: 'Login failed' };
+  login: async (email, password) => {
+    try {
+      // console.log('login request:', { email, password });
+      
+      // POST /api/users/login
+      const response = await api.post('/users/login', { 
+        email: email, 
+        password: password 
+      });
+      
+      // console.log(' lggin response:', response.data);
+      return response.data;
+      
+    } catch (error) {
+      console.log('Login API error:', error.response?.data || error.message);
+      throw error.response?.data || { message: 'Login failed' };
+    }
   }
-}
+};
