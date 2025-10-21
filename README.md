@@ -1,0 +1,39 @@
+# JobedIn 
+
+
+---
+
+##  Tech Stack
+
+**Frontend:** React Native  
+**Backend:** Node.js, Express.js  
+**Database:** MySQL  
+**Authentication:** JWT Tokens
+
+---
+
+##  Implemented
+
+- **User Authentication** - Login and registration system
+- **Job Listings** - Browse available job opportunities  
+- **Job Applications** - Apply to jobs with ease
+
+---
+
+## Coming Soon
+
+- **Job Creation** - Employers can post new job listings
+- **Application Management** - View and manage job applicants
+- **Candidate Decisions** - Accept or reject applicants
+- **Notifications** - Real-time updates for application status
+
+---
+
+##  App Preview
+
+<img width="230" height="350" alt="Login Screen" src="https://github.com/user-attachments/assets/082effb2-71ce-4138-825b-944d7d8808e1" />
+<img width="230" height="350" alt="Job Listings" src="https://github.com/user-attachments/assets/a60fdc36-39a2-45bb-ade9-c144e9bb1627" />
+<img width="230" height="350" alt="Job Details" src="https://github.com/user-attachments/assets/f41f8932-9e1a-433a-ad9a-5d9f4471ab9f" />
+
+---
+
