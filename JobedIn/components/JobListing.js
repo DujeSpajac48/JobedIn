@@ -1,49 +1,117 @@
-import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 
-// export const COLORS = {
-//    background: '#F5EDE3',     // svijetla bež pozadina ekrana
-//    card: '#FFF8F1',           // bež karta (forma)
-//    accent: '#E6734B',         // narančasti gumb
-//    accentDark: '#C55B3A',     // tamnija narančasta
-//    text: '#4A3C31',           // tamno smeđa za tekst
-//    textLight: '#8E7D6B',      // svjetlija smeđa za sekundarni tekst
-//    border: '#E8DCCA',         // tanka linija obruba inputa
-//    white: '#FFFFFF',          // čista bijela
-//  };
-
-export default function JobLisitng(){
+export default function JobListing(){
    return(
       <View style={styles.listingContainer}>
-         <View style={styles.positionContainer}>
-            <Text style={styles.roleText}>Developer</Text>
+         <View style={styles.topRowContainer}>
+            <View style={styles.positionContainer}>
+               <Text style={styles.roleText}>UI/UX designer</Text>
+            </View>
+            <View style={styles.workTypeContainer}>
+               <Text style={styles.workTypeText}>Full-Time</Text>
+            </View>
          </View>
-         <Text>Job listing</Text>
+         
+         <View style={styles.jobListingCompanyDetails}>
+            <Text style={styles.textStyleJobListing}>Firma</Text>
+            <Text style={styles.textStyleJobListing}>Location</Text>
+            <Text style={styles.textStyleJobListing}>Remote/Onsite</Text>
+            <Text style={styles.textStyleJobListing}>Satnica</Text>
+         </View>
+
+         <View style={styles.jobDescriptionContainer}>
+            <Text style={styles.jobDescriptionText}>
+               Pero Bosnjak, odnosno Mali Cigan iz Bosne, je rekao da je MYP protein čak i dobar.
+            </Text>
+         </View>
+
+         <View style={styles.bottomRowContainer}>
+            <View>
+               <Text style={styles.dateText}>Listed: 03/02/2025</Text>
+            </View>
+
+            <Pressable style={styles.applyButton}>
+               <Text style={styles.applyText}>Apply</Text>
+            </Pressable>
+         </View>
       </View>
    );
 }
 
 const styles = StyleSheet.create({
-   listingContainer:{
-      borderWidth: 1,
+   listingContainer: {
+      borderWidth: 0.2,
       borderColor: 'red',
-      // justifyContent: 'center',
-      alignItems: 'center',
       backgroundColor: '#FFF8F1',
-
-      width: '100%',
-      height: '24%',
-      marginVertical: '4%',
-      
+      width: '96%',
+      minHeight: 180,
+      marginVertical: 10,
+      padding: 12,
+      borderRadius: 12,
    },
-   positionContainer:{
-      borderWidth: 1,
-      borderColor: 'blue',
-      alignSelf: 'flex-start',
-      padding: 6,
+   topRowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: 8,
    },
-   roleText:{
+   positionContainer: {
+      flex: 1,
+   },
+   workTypeContainer: {
+      backgroundColor: 'lightblue',
+      borderRadius: 12,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+   },
+   workTypeText: {
+      fontSize: 12,
+      fontWeight: '500',
+   },
+   roleText: {
       fontWeight: 'bold',
-      fontSize: 26,
+      fontSize: 20,
       color: '#4A3C31'
+   },
+   jobListingCompanyDetails: {
+      width: '68%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 8,
+   },
+   textStyleJobListing: {
+      color: 'grey',
+      fontSize: 12,
+   },
+   jobDescriptionContainer: {
+      marginVertical: 8,
+      maxHeight: 80,
+   },
+   jobDescriptionText: {
+      color: '#2F4F4F',
+      fontSize: 14,
+      lineHeight: 18,
+   },
+   bottomRowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: 8,
+   },
+   dateText: {
+      fontSize: 12,
+      color: '#666',
+   },
+   applyButton: {
+      borderWidth: 1,
+      paddingHorizontal: 20,
+      paddingVertical: 8,
+      borderRadius: 8,
+      backgroundColor: '#E6734B',
+      borderColor: '#C55B3A',
+   },
+   applyText: {
+      color: 'white',
+      fontWeight: '500',
    },
 });

@@ -1,6 +1,7 @@
 import { createContext } from "react";
-import { Text,View,StyleSheet,TextInput,Pressable} from "react-native";
+import { Text,View,StyleSheet,TextInput,Pressable,ScrollView} from "react-native";
 import JobListing from '../components/JobListing';
+import { useEffect } from "react";
 
 // export const COLORS = {
 //    background: '#F5EDE3',     // svijetla bež pozadina ekrana
@@ -13,22 +14,41 @@ import JobListing from '../components/JobListing';
 //    white: '#FFFFFF',          // čista bijela
 //  };
 export default function HomeScreen(){
+   // const [jobs,setJobs] = useEffect([]);
+
+   // useEffect(()=>{
+   //    loadJobs();
+   // },[]);
+   // const loadJobs = async()=>{
+   //    try {
+         
+   //    }catch (e)
+   // }
    return(
       <View style={styles.mainContainer}>
-         <Text>HomeScreen</Text>
-
-         <JobListing></JobListing>
-
+         <ScrollView 
+           style={styles.scrollContainer}
+           contentContainerStyle={styles.scrollContent} 
+         >
+            <Text>HomeScreen</Text>
+            <JobListing/>
+            <JobListing/>
+            <JobListing/>
+         </ScrollView>
       </View>
    );
 }
 
 const styles = StyleSheet.create({
    mainContainer:{
-      flex:1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5EDE3'
+      flex: 1,
+      backgroundColor: '#F5EDE3',
    },
-
+   scrollContainer:{
+      flex: 1,
+   },
+   scrollContent: {
+      alignItems: 'center', 
+      paddingVertical: 20
+   }
 });

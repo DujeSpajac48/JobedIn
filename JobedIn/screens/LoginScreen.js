@@ -2,6 +2,8 @@ import { Text,View,StyleSheet,TextInput,Pressable, Alert} from "react-native";
 import { useState } from "react";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { userAPI } from "../services/api";
+
+import { useNavigation } from "@react-navigation/native";
 // export const COLORS = {
 //    background: '#F5EDE3',     // svijetla bež pozadina ekrana
 //    card: '#FFF8F1',           // bež karta (forma)
@@ -14,6 +16,7 @@ import { userAPI } from "../services/api";
 //  };
 export default function LoginScreen(){
 
+   const navigation = useNavigation();
    const [showPassword,setShowPassword] = useState(false);
    const [loading,setLoading]= useState(false);
    //napravit handle login logi
@@ -46,6 +49,7 @@ export default function LoginScreen(){
          const response = await userAPI.login(formData.email, formData.pass);
 
          if (response?.success) {
+            navigation.navigate('Home',{isLoggedIn: true});
             alert('Login successful!');
             console.log('Logged in user:', response.user);
          } else {
@@ -129,7 +133,8 @@ export default function LoginScreen(){
 
             <View style={styles.registerContainer}>
                <Text>Dont have an acount?</Text>
-               <Pressable style={styles.registerButton}>
+               <Pressable style={styles.registerButton}
+               onPress={()=>{navigation.navigate('Register')}}>
                   <Text style={styles.registerButtonText}>Sign Up</Text>
                </Pressable>
             </View>

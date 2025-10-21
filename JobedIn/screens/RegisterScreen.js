@@ -2,8 +2,11 @@ import { Text,View,StyleSheet,TextInput,Pressable,} from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useState } from "react";
 import  {userAPI}  from '../services/api';
-
+import { useNavigation } from "@react-navigation/native";
 export default function RegisterScreen(){
+
+   const navigation = useNavigation();
+
    const [showPassword,setShowPassword] = useState(false);
    const [loading, setLoading] = useState(false);
 
@@ -51,6 +54,7 @@ export default function RegisterScreen(){
                pass: '',      
                role: null
             });
+            navigation.navigate('Login');
             setSelectedRole(null);
          }
       } catch (error) {
@@ -198,7 +202,10 @@ export default function RegisterScreen(){
             
             <View style={styles.registerContainer}>
                <Text>Already have an acount?</Text>
-               <Pressable style={styles.registerButton}>
+               <Pressable 
+               style={styles.registerButton}
+               onPress={()=>{navigation.navigate('Login')}}
+               >
                   <Text style={styles.registerButtonText}>Login</Text>
                </Pressable>
             </View>
