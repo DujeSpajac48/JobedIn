@@ -1,41 +1,32 @@
-import axios from 'axios';
-import { Platform } from 'react-native';
+import axios from "axios";
 
-const API_BASE_URL = Platform.OS === 'android'
-  ? 'http://10.0.2.2:3000/api' // Android emulator
-  : 'http://localhost:3000/api'; // iOS simulator
+const API_BASE_URL = "http://127.0.0.1:3000/api"; // iOS SIMULATOR 
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
+  headers: { "Content-Type": "application/json" },
 });
 
 export const userAPI = {
   register: async (userData) => {
     try {
-      const response = await api.post('/users', userData);
-      return response.data;
+      const res = await api.post("/register", userData); //  /api/register
+      return res.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Network error' };
+      console.log("Register error:", error.response?.status, error.response?.data || error.message);
+      throw error.response?.data || { message: "Registration failed" };
     }
   },
 
   login: async (email, password) => {
     try {
-      // console.log('login request:', { email, password });
-      
-      // POST /api/users/login
-      const response = await api.post('/users/login', { 
-        email: email, 
-        password: password 
-      });
-      
-      // console.log(' lggin response:', response.data);
-      return response.data;
-      
+
+      const res = await api.post("/users/login", { email, password }); // /api/users/login
+      return res.data; // { token, user }
     } catch (error) {
-      console.log('Login API error:', error.response?.data || error.message);
-      throw error.response?.data || { message: 'Login failed' };
+      console.log("Login error:",error.message);
+      throw error.response?.data || { message: "Login failed" };
     }
-  }
+  },
 };

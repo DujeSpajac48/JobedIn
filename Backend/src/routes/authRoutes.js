@@ -1,15 +1,21 @@
 import express from "express";
-//db
-import pool from "../db.js";
-import {login} from "../controller/authController.js"
+
+import {login, register} from "../controller/authController.js"
+
 
 const router =  express.Router();
 
 
 // router.get('/user',getAllUsers);
 
-// router.post('/user',newUser);
-router.post('/login',login);
+router.post('/register',register);
+router.post('/users/login',login);
+
+
+router.get('/test', (req, res) => {
+   console.log('✅ Test route works!');
+   res.json({ message: 'Test successful' });
+ });
 
 
 
