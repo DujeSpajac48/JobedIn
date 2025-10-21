@@ -31,9 +31,9 @@
 
 ##  App Preview
 
-<img width="230" height="350" alt="Login Screen" src="https://github.com/user-attachments/assets/082effb2-71ce-4138-825b-944d7d8808e1" />
-<img width="230" height="350" alt="Job Listings" src="https://github.com/user-attachments/assets/a60fdc36-39a2-45bb-ade9-c144e9bb1627" />
-<img width="230" height="350" alt="Job Details" src="https://github.com/user-attachments/assets/f41f8932-9e1a-433a-ad9a-5d9f4471ab9f" />
+<img width="230" height="460" alt="Login Screen" src="https://github.com/user-attachments/assets/082effb2-71ce-4138-825b-944d7d8808e1" />
+<img width="230" height="460" alt="Job Listings" src="https://github.com/user-attachments/assets/a60fdc36-39a2-45bb-ade9-c144e9bb1627" />
+<img width="230" height="460" alt="Job Details" src="https://github.com/user-attachments/assets/f41f8932-9e1a-433a-ad9a-5d9f4471ab9f" />
 
 ---
 
