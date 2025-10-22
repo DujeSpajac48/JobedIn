@@ -1,33 +1,34 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
-
-export default function JobListing(){
+export default function JobListing({ job }){ 
    return(
       <View style={styles.listingContainer}>
          <View style={styles.topRowContainer}>
             <View style={styles.positionContainer}>
-               <Text style={styles.roleText}>UI/UX designer</Text>
+               <Text style={styles.roleText}>{job?.role || 'UI/UX Designer'}</Text> 
             </View>
             <View style={styles.workTypeContainer}>
-               <Text style={styles.workTypeText}>Full-Time</Text>
+               <Text style={styles.workTypeText}>{job?.location || 'Remote'}</Text> 
             </View>
          </View>
-         
+
          <View style={styles.jobListingCompanyDetails}>
-            <Text style={styles.textStyleJobListing}>Firma</Text>
-            <Text style={styles.textStyleJobListing}>Location</Text>
-            <Text style={styles.textStyleJobListing}>Remote/Onsite</Text>
-            <Text style={styles.textStyleJobListing}>Satnica</Text>
+            <Text style={styles.textStyleJobListing}>Employer ID: {job?.employer_id || 'N/A'}</Text> 
+            <Text style={styles.textStyleJobListing}>{job?.location || 'Location'}</Text>
+            <Text style={styles.textStyleJobListing}>{job?.roleFilled ? 'Filled' : 'Available'}</Text> 
+            <Text style={styles.textStyleJobListing}>{job?.hourlyRate ? `${job.hourlyRate}€/h` : 'Satnica'}</Text> 
          </View>
 
          <View style={styles.jobDescriptionContainer}>
             <Text style={styles.jobDescriptionText}>
-               Pero Bosnjak, odnosno Mali Cigan iz Bosne, je rekao da je MYP protein čak i dobar.
+               {job?.jobDesc || 'A job description should appear here...'} 
             </Text>
          </View>
 
          <View style={styles.bottomRowContainer}>
             <View>
-               <Text style={styles.dateText}>Listed: 03/02/2025</Text>
+               <Text style={styles.dateText}>
+                  Listed: {job?.dateListed || '03/02/2025'} 
+               </Text>
             </View>
 
             <Pressable style={styles.applyButton}>

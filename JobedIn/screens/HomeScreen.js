@@ -1,54 +1,74 @@
-import { createContext } from "react";
-import { Text,View,StyleSheet,TextInput,Pressable,ScrollView} from "react-native";
+import { useState, useEffect } from "react";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context"; 
 import JobListing from '../components/JobListing';
-import { useEffect } from "react";
+import { jobAPI } from '../services/api';
 
-// export const COLORS = {
-//    background: '#F5EDE3',     // svijetla bež pozadina ekrana
-//    card: '#FFF8F1',           // bež karta (forma)
-//    accent: '#E6734B',         // narančasti gumb
-//    accentDark: '#C55B3A',     // tamnija narančasta
-//    text: '#4A3C31',           // tamno smeđa za tekst
-//    textLight: '#8E7D6B',      // svjetlija smeđa za sekundarni tekst
-//    border: '#E8DCCA',         // tanka linija obruba inputa
-//    white: '#FFFFFF',          // čista bijela
-//  };
 export default function HomeScreen(){
-   // const [jobs,setJobs] = useEffect([]);
+   const [jobs, setJobs] = useState([]);
+   const [loading, setLoading] = useState(true);
 
-   // useEffect(()=>{
-   //    loadJobs();
-   // },[]);
-   // const loadJobs = async()=>{
-   //    try {
-         
-   //    }catch (e)
-   // }
+   useEffect(() => {
+      loadJobs();
+   }, []);
+
+   const loadJobs = async () => {
+      try {
+         console.log('Loading jobs...');
+         const response = await jobAPI.getJobListings();
+         setJobs(response.data);
+         console.log('Jobs loaded:', response.data.length);
+      } catch (error) {
+         console.log('Error loading jobs:', error);
+      } finally {
+         setLoading(false);
+      }
+   };
+
+   if (loading) {
+      return (
+         <SafeAreaView style={styles.mainContainer}> 
+            <Text>Loading jobs...</Text>
+         </SafeAreaView>
+      );
+   }
+
    return(
-      <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}> 
          <ScrollView 
            style={styles.scrollContainer}
            contentContainerStyle={styles.scrollContent} 
          >
-            <Text>HomeScreen</Text>
-            <JobListing/>
-            <JobListing/>
-            <JobListing/>
+            <Text style={styles.title}>Available Jobs</Text>
+            
+            {jobs.length === 0 ? (
+               <Text>No jobs available</Text>
+            ) : (
+               jobs.map(job => (
+                  <JobListing key={job.id} job={job} />
+               ))
+            )}
          </ScrollView>
-      </View>
+      </SafeAreaView>
    );
 }
 
 const styles = StyleSheet.create({
-   mainContainer:{
+   mainContainer: {
       flex: 1,
       backgroundColor: '#F5EDE3',
    },
-   scrollContainer:{
+   scrollContainer: {
       flex: 1,
    },
    scrollContent: {
       alignItems: 'center', 
       paddingVertical: 20
+   },
+   title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      color: '#4A3C31'
    }
 });

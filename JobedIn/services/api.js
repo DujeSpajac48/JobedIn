@@ -30,3 +30,15 @@ export const userAPI = {
     }
   },
 };
+
+export const jobAPI ={
+  getJobListings: async () => {
+    try{
+      const jobs = await api.get('/jobs');// /api/jobs
+      return jobs.data;
+    } catch (e){
+      console.log("getJob api error: ", e.response?.status || e.message);
+      throw e.response?.data || { message: "Job listing failed"}
+    }
+  }
+}
